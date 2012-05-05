@@ -21,4 +21,3 @@ doc/
 .project
 .DS_Store
 bundler_stubs/
-/config/database.yml
