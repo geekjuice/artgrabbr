@@ -1,0 +1,41 @@
+<h1>Listing orders</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Address line 1</th>
+    <th>Address line 2</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zipcode</th>
+    <th>Subtotal</th>
+    <th>Total</th>
+    <th>Delivary method</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @orders.each do |order| %>
+  <tr>
+    <td><%= order.name %></td>
+    <td><%= order.email %></td>
+    <td><%= order.address_line_1 %></td>
+    <td><%= order.address_line_2 %></td>
+    <td><%= order.city %></td>
+    <td><%= order.state %></td>
+    <td><%= order.zipcode %></td>
+    <td><%= order.subtotal %></td>
+    <td><%= order.total %></td>
+    <td><%= order.delivary_method %></td>
+    <td><%= link_to 'Show', order %></td>
+    <td><%= link_to 'Edit', edit_order_path(order) %></td>
+    <td><%= link_to 'Destroy', order, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Order', new_order_path %>
