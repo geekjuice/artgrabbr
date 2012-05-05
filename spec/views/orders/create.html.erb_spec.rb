@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe "orders/new.html.erb" do
+describe "orders/create.html.erb" do
   pending "add some examples to (or delete) #{__FILE__}"
 end

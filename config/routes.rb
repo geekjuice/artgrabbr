@@ -1,10 +1,22 @@
 Artgrabbr::Application.routes.draw do
   
-  resources :users do
-    resources :artworks
-  end
+  get "orders/new"
 
-  resources :orders
+  get "orders/create"
+
+  get "orders/show"
+
+  get "artworks/show"
+
+  get "users/index"
+
+  get "users/show"
+
+  namespace :admin, :path => "adminn" do
+    resources :users
+    resources :artworks
+    resources :orders
+  end
 
   root to: 'static_pages#home'
   
