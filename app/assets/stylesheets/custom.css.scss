@@ -1,5 +1,11 @@
 @import "bootstrap";
 
+@mixin box_sizing {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 /* universal */
 
 html {
@@ -24,6 +30,10 @@ textarea {
 
 .center h1 {
 	margin-bottom: 10px;
+}
+
+.hero-unit {
+	text-align: center;
 }
 
 /* typography */
@@ -69,4 +79,78 @@ p {
 		color: $white;
 		text-decoration:none;
 	}
+}
+
+
+/*  footer  */
+
+footer {
+	margin-top: 45px;
+	padding-top: 5px;
+	border-top: 1px solid $grayLighter;
+	color: $grayLight;
+	a {
+		color: $gray;
+		&:hover {
+			color: $grayDarker;
+		}
+	}
+	small {
+		float:left;
+	}
+	ul {
+		float: right;
+		list-style: none;
+		li {
+			float: left;
+			margin-left: 10px;
+		}
+	}
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+	border: 1px solid #bbb;
+	width: 100%;
+	padding: 10px;
+	height: auto;
+	margin-bottom: 15px;
+	@include box_sizing;
+}
+
+form div span {
+	&.counter{
+		float: right;
+		font-size:1.4em;
+		font-weight:bold;
+		margin-bottom:3px;
+		color:#ccc;
+	}
+	&.warning{color:#600;}
+	&.exceeded{color:#e00;}
+}
+
+
+#error_explanation {
+	color:#f00;
+	ul {
+		list-style: none;
+		margin: 0 0 18px 0;
+	}
+}
+
+.field_with_errors {
+	@extend .control-group;
+	@extend .error;
+}
+
+/* miscellaneous */
+
+.debug_dump {
+	clear: both;
+	float: left;
+	width: 100%;
+	margin-top: 45px;
+	@include box_sizing;
 }

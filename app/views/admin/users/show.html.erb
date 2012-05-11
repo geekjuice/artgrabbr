@@ -1,35 +1,39 @@
-<p id="notice"><%= notice %></p>
+<div class="hero-unit">
+  <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+  <p><h2>Admin View</h2></p>
+  <p id="notice"><%= notice %></p>
+</div>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+<div class="span4">
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td><b>Email:</b></td>
+        <td><%= @user.email %></td>
+      </tr>  
+      <tr>
+        <td><b>School:</b></td>
+        <td><%= @user.school %></td>
+      </tr>
+      <tr>
+        <td><b>Major:</b></td>
+        <td><%= @user.major %></td>
+      </tr>
+      <div>
+      <tr>
+        <td colspan="2"><b>Bio</b></td>
+      </tr>
+      <tr>
+        <td colspan="2"><%= @user.bio %></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <%= link_to 'Edit', edit_admin_user_path(@user), class:"btn btn-small" %> |
+  <%= link_to 'Add Art', new_admin_artwork_path(@user), class:'btn btn-small' %> |
+  <%= link_to 'Back', admin_users_path, class:"btn btn-small" %>
+</div>
 
-<p>
-  <b>First name:</b>
-  <%= @user.first_name %>
-</p>
+<div class="span8">
 
-<p>
-  <b>Last name:</b>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <b>School:</b>
-  <%= @user.school %>
-</p>
-
-<p>
-  <b>Major:</b>
-  <%= @user.major %>
-</p>
-
-<p>
-  <b>Bio:</b>
-  <%= @user.bio %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+</div

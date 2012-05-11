@@ -1,25 +1,32 @@
 Artgrabbr::Application.routes.draw do
   
-  get "orders/new"
+  # get "orders/new"
 
-  get "orders/create"
+  # get "orders/create"
 
-  get "orders/show"
+  # get "orders/show"
 
-  get "artworks/show"
+  # get "artworks/show"
 
-  get "users/index"
+  # get "users/index"
 
-  get "users/show"
+  # get "users/show"
 
-  namespace :admin, :path => "adminn" do
-    resources :users
-    resources :artworks
+  resources :users
+  resources :artworks
+  resources :orders
+
+  namespace :admin, :path => "payphone" do
+    resources :users do
+      member do
+        resources :artworks
+      end
+    end
     resources :orders
   end
 
   root to: 'static_pages#home'
-  
+
   match '/help', to: "static_pages#help"
   
 end
