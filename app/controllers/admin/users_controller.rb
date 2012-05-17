@@ -22,7 +22,7 @@ class Admin::UsersController < AdminController
       flash[:notice] = 'User was successfully created.' 
       redirect_to admin_user_path(@user)
     else
-      render action: "new"
+      render 'new'
     end
   end
 

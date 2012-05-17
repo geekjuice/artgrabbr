@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(:version => 20120505190922) do
   add_index "artwork_images", ["artwork_id"], :name => "index_artwork_images_on_artwork_id"
 
   create_table "artworks", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "title"
+    t.integer  "user_id",                                                   :null => false
+    t.string   "title",                                                     :null => false
     t.decimal  "price",      :precision => 8, :scale => 2, :default => 0.0
     t.string   "medium"
     t.string   "info"
@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(:version => 20120505190922) do
   add_index "artworks", ["user_id"], :name => "index_artworks_on_user_id"
 
   create_table "orders", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
+    t.integer  "artwork_id",                                                     :null => false
+    t.string   "name",                                                           :null => false
+    t.string   "email",                                                          :null => false
     t.string   "address_line_1"
     t.string   "address_line_2"
     t.string   "city"
@@ -51,9 +52,9 @@ ActiveRecord::Schema.define(:version => 20120505190922) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "email",      :null => false
+    t.string   "first_name", :null => false
+    t.string   "last_name",  :null => false
     t.string   "school"
     t.string   "major"
     t.string   "bio"
