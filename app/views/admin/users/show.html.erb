@@ -3,37 +3,65 @@
   <p><h2>Admin View</h2></p>
   <p id="notice"><%= notice %></p>
 </div>
+<div class="row">
+  <div class="span4">
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td><b>Email:</b></td>
+          <td><%= @user.email %></td>
+        </tr>  
+        <tr>
+          <td><b>School:</b></td>
+          <td><%= @user.school %></td>
+        </tr>
+        <tr>
+          <td><b>Major:</b></td>
+          <td><%= @user.major %></td>
+        </tr>
+        <tr>
+          <td colspan="2"><b>Bio</b></td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= @user.bio %></td>
+        </tr>
+      </tbody>
+    </table>
 
-<div class="span4">
-  <table class="table table-bordered">
-    <tbody>
-      <tr>
-        <td><b>Email:</b></td>
-        <td><%= @user.email %></td>
-      </tr>  
-      <tr>
-        <td><b>School:</b></td>
-        <td><%= @user.school %></td>
-      </tr>
-      <tr>
-        <td><b>Major:</b></td>
-        <td><%= @user.major %></td>
-      </tr>
-      <div>
-      <tr>
-        <td colspan="2"><b>Bio</b></td>
-      </tr>
-      <tr>
-        <td colspan="2"><%= @user.bio %></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <%= link_to 'Edit', edit_admin_user_path(@user), class:"btn btn-small" %> |
-  <%= link_to 'Add Art', new_admin_artwork_path(@user), class:'btn btn-small' %> |
-  <%= link_to 'Back', admin_users_path, class:"btn btn-small" %>
+    <%= link_to 'Edit', edit_admin_user_path(@user), class:"btn btn-small" %> |
+    <%= link_to 'Add Art', new_admin_artwork_path(@user), class:'btn btn-small' %> |
+    <%= link_to 'Back', admin_users_path, class:"btn btn-small" %>
+  </div>
+
+  <!-- ARTWORKS -->
+  <div class="span8">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Medium</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.artworks.each do |artwork| %>
+          <tr>
+          <td><%= User.find(artwork.user_id).first_name%> 
+            <%= User.find(artwork.user_id).last_name%></td>
+            <td><%= artwork.title %></td>
+            <td><%= artwork.price %></td>
+            <td><%= artwork.medium %></td>
+            <td><%= link_to 'Show', [:admin, artwork], class:"btn btn-small" %></td>
+            <td><%= link_to 'Edit', edit_admin_artwork_path(artwork), class:"btn btn-small" %></td>
+            <td><%= link_to 'Destroy', [:admin, artwork], confirm: 'Are you sure?', method: :delete, 
+            class:"btn btn-small" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>  <!-- CLEAN THIS EFF UP TOO (Partials or JS) -->
 </div>
-
-<div class="span8">
-
-</div

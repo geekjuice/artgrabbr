@@ -12,18 +12,22 @@ Artgrabbr::Application.routes.draw do
 
   # get "users/show"
 
-  resources :users
-  resources :artworks
+  resources :users do
+    resources :artworks
+  end
   resources :orders
 
   namespace :admin, :path => "payphone" do
     resources :users do
       member do
-        resources :artworks
+        resources :artworks do 
+          member do
+            resources :orders
+          end
+        end
       end
     end
-    resources :orders
-  end
+  end #Fix this atrocity of a nest
 
   root to: 'static_pages#home'
 

@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20120505190922) do
     t.string   "zipcode"
     t.decimal  "subtotal",        :precision => 8, :scale => 2, :default => 0.0
     t.decimal  "total",           :precision => 8, :scale => 2, :default => 0.0
-    t.string   "delivary_method"
+    t.string   "delivery_method"
     t.datetime "created_at",                                                     :null => false
     t.datetime "updated_at",                                                     :null => false
   end

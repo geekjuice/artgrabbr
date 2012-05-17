@@ -15,7 +15,8 @@
   <tbody>
     <% @artworks.each do |artwork| %>
     <tr>
-      <td><%= artwork.user %></td>
+      <td><%= User.find(artwork.user_id).first_name%> 
+          <%= User.find(artwork.user_id).last_name%></td>
       <td><%= artwork.title %></td>
       <td><%= artwork.price %></td>
       <td><%= artwork.medium %></td>

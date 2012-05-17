@@ -3,4 +3,4 @@
 <%= render 'form' %>
 
 <%= link_to 'Show', @artwork %> |
-<%= link_to 'Back', artworks_path %>
+<%= link_to 'Back', admin_user_path(@artwork.user) %>
