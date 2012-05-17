@@ -1,5 +1,16 @@
 <h1>New order</h1>
+<h2>Title: <%= @artwork.title %></h2>
+<h2>by: <%= @artwork.user.name %></h2> 
 
-<%= render 'form' %>
 
-<%= link_to 'Back', orders_path %>
+<div class="row">
+	<div class="span8 offset2">
+		<div class = "hero-unit">
+			<%= form_for([:admin, @order]) do |f| %>
+				<%= render 'form', f: f %>
+				<%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+				<%= link_to 'Back', @order, class:'btn btn-large' %>
+			<% end %>
+		</div>
+	</div>
+</div>

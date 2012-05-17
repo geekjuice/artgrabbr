@@ -15,4 +15,18 @@ class User < ActiveRecord::Base
   validates :email, presence: true, 
                     format: {with: VALID_EMAIL_REGEX},
                     uniqueness: { case_sensitive: false }
+  
+  before_save :cleanup                  
+
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+
+  private 
+
+  def cleanup
+    self[:first_name] = self[:first_name].capitalize
+    self[:last_name] = self[:last_name].capitalize  
+  end
 end

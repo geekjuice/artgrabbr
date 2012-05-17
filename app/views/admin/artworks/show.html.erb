@@ -1,28 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>User ID:</b>
-  <%= User.find(@artwork.user_id).first_name %>
-</p>
-<p>
-  <b>User Check (Debug)</b>
-  <%= @artwork.user.first_name %>
-</p>
-<p>
-  <b>Title:</b>
-  <%= @artwork.title %>
-</p>
+<div class="row">
+  <div class="span8 offset2">
+    <div class="hero-unit">
+      <p>
+        <b>User ID:</b>
+        <%= User.find(@artwork.user_id).first_name %>
+      </p>
+      <p>
+        <b>User Check (Debug)</b>
+        <%= @artwork.user.first_name %>
+      </p>
+      <p>
+        <b>Title:</b>
+        <%= @artwork.title %>
+      </p>
 
-<p>
-  <b>Price:</b>
-  <%= @artwork.price %>
-</p>
+      <p>
+        <b>Price:</b>
+        <%= @artwork.price %>
+      </p>
 
-<p>
-  <b>Medium:</b>
-  <%= @artwork.medium %>
-</p>
+      <p>
+        <b>Medium:</b>
+        <%= @artwork.medium %>
+      </p>
 
 
-<%= link_to 'Edit', edit_admin_artwork_path(@artwork) %> |
-<%= link_to 'Back', admin_user_path(@artwork.user) %>
+      <%= link_to 'Edit', edit_admin_artwork_path(@artwork), class: "btn btn-small" %> |
+      <%= link_to 'Back', admin_user_path(@artwork.user), class: "btn btn-small" %>
+    </div>
+  </div>
+  <div class="span4 offset4">
+      <h1>Ordering</h1>
+      <h2></h2>
+  </div>
+</div>
