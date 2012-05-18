@@ -8,8 +8,9 @@ class Admin::OrdersController < AdminController
   end
 
   def new
-    @artwork = Artwork.find(params[:id])
+    @artwork = Artwork.find(params[:artwork_id])
     @order = Order.new
+    @order.artwork_id = @artwork.id
   end
 
   def edit
@@ -17,22 +18,18 @@ class Admin::OrdersController < AdminController
   end
 
   def create
-    @artwork = Artwork.find(params[:id])
-    @order = @artwork.order.build(params[:order], artwork: @artwork)
-    @order.artwork_id = @artwork_id
-    # @order = Order.new(params[:order])
+    @artwork = Artwork.find(params[:order][:artwork_id])
+    @order = @artwork.build_order(params[:order], artwork: @artwork)
     if @order.save
-      flash[:notice] = "Order created!"
+      @artwork.toggle!(:sold)
+      flash[:notice] = "Order created! " + @artwork.sold.to_s
       redirect_to [:admin, @artwork]
     else
       render action: "new"
     end
-    # flash[:notice] = @artwork.title
-    # redirect_to [:admin, @user]
   end
 
-  # PUT /orders/1
-  # PUT /orders/1.json
+
   def update
     @order = Order.find(params[:id])
 
@@ -47,8 +44,6 @@ class Admin::OrdersController < AdminController
     end
   end
 
-  # DELETE /orders/1
-  # DELETE /orders/1.json
   def destroy
     @order = Order.find(params[:id])
     @order.destroy

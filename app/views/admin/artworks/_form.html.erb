@@ -1,12 +1,9 @@
 <%= render 'shared/error_messages', object: f.object %>
 
-<!--   <div class="field">
-    <%#= f.label :user %><br />
-    <%#= f.text_field :user %>
-  </div> -->
-  <div>
-    <h2><%#= @user.id %></h2>
-  </div>  
+	<%#= f.label :user_id %>
+	<%#= f.text_field :user_id %>
+
+	<%= f.hidden_field :user_id %>
 
   <%= f.label :title %>
   <%= f.text_field :title %>

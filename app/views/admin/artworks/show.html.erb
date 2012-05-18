@@ -1,15 +1,13 @@
-<p id="notice"><%= notice %></p>
-
 <div class="row">
   <div class="span8 offset2">
     <div class="hero-unit">
       <p>
         <b>User ID:</b>
-        <%= User.find(@artwork.user_id).first_name %>
+        <%= User.find(@artwork.user_id).name %>
       </p>
       <p>
         <b>User Check (Debug)</b>
-        <%= @artwork.user.first_name %>
+        <%= @artwork.user.name %>
       </p>
       <p>
         <b>Title:</b>
@@ -18,7 +16,7 @@
 
       <p>
         <b>Price:</b>
-        <%= @artwork.price %>
+        $<%= @artwork.price %>
       </p>
 
       <p>
@@ -26,13 +24,23 @@
         <%= @artwork.medium %>
       </p>
 
-
-      <%= link_to 'Edit', edit_admin_artwork_path(@artwork), class: "btn btn-small" %> |
-      <%= link_to 'Back', admin_user_path(@artwork.user), class: "btn btn-small" %>
+      <p>
+        <%= link_to 'Edit', edit_admin_artwork_path(@artwork), class: "btn btn-small" %> |
+        <%= link_to 'Back', admin_user_path(@artwork.user), class: "btn btn-small" %>
+      </p>
     </div>
   </div>
   <div class="span4 offset4">
-      <h1>Ordering</h1>
-      <h2></h2>
+    <h1>Ordering</h1>
+    <div class="center">
+      <p>
+        <% if @artwork.sold %>
+          <h2>SOLD!</h2>        
+        <% else %>
+          <%= link_to 'Order now', new_admin_order_path(artwork_id: @artwork.id), class: "btn btn-large btn-primary" %>
+          <h2>Available</h2>
+        <% end %>
+      </p>
+    </div>
   </div>
 </div>

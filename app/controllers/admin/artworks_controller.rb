@@ -11,7 +11,9 @@ class Admin::ArtworksController < AdminController
   end
 
   def new
+    @user = User.find(params[:user_id])
     @artwork = Artwork.new
+    @artwork.user_id = @user.id
   end
 
   def edit
@@ -19,10 +21,10 @@ class Admin::ArtworksController < AdminController
   end
 
   def create
-    @user = User.find(params[:id])
+    @user = User.find(params[:artwork][:user_id])
     @artwork = @user.artworks.build(params[:artwork], user: @user)
     if @artwork.save
-      flash[:notice] = "New artwork created!"
+      flash[:success] = "New artwork created!"
       redirect_to [:admin, @user]
     else
         render action: "new"
@@ -34,7 +36,7 @@ class Admin::ArtworksController < AdminController
     @artwork = Artwork.find(params[:id])
     @user = @artwork.user
     if @artwork.update_attributes(params[:artwork])
-      flash[:notice] = @user.first_name + %{'s artwork updated!}
+      flash[:success] = @user.name + %{'s artwork updated!}
       redirect_to [:admin, @user]
     else
       render action: "edit"

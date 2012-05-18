@@ -6,6 +6,7 @@ class CreateArtworks < ActiveRecord::Migration
       t.decimal :price,       :precision => 8, :scale => 2, :default => 0.0
       t.string :medium
       t.string :info
+      t.boolean :sold,        :default => false
       t.timestamps
     end
     add_index :artworks, :user_id
