@@ -8,6 +8,7 @@
 		<div class = "hero-unit">
 			<%= form_for([:admin, @order]) do |f| %>
 				<%= render 'form', f: f %>
+				<h1>Total: <%= @artwork.price%></h1></br>
 				<%= f.submit "Submit", class: "btn btn-large btn-primary" %>
 				<%= link_to 'Back', [:admin, @artwork], class:'btn btn-large' %>
 			<% end %>

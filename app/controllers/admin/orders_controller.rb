@@ -22,7 +22,7 @@ class Admin::OrdersController < AdminController
     @order = @artwork.build_order(params[:order], artwork: @artwork)
     if @order.save
       @artwork.toggle!(:sold)
-      flash[:notice] = "Order created! " + @artwork.sold.to_s
+      flash[:notice] = "Order created!"
       redirect_to [:admin, @artwork]
     else
       render action: "new"
