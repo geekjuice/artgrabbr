@@ -5,7 +5,7 @@
       <p>
         <% if @artwork.sold %>
           <h2>SOLD!</h2>   
-          <%= link_to 'View Order', admin_order_path(artwork_id: @artwork.id), class: "btn btn-large" %>     
+          <%= link_to 'View Order', [:admin, @artwork.order], class: "btn btn-large" %>     
         <% else %>
           <h2>Available</h2>
           <%= link_to 'Order now', new_admin_order_path(artwork_id: @artwork.id), class: "btn btn-large btn-primary" %>

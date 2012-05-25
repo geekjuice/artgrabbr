@@ -7,4 +7,4 @@ class Order < ActiveRecord::Base
   validates :artwork_id, presence: true
   validates :name, presence: true
   validates :email, presence: true
-end
+end 

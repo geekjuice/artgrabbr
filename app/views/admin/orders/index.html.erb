@@ -1,0 +1,33 @@
+<h1>Listing orders</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Buyer</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.artwork.user.name %></td>
+      <td><%= order.artwork.title %></td>
+      <td><%= order.artwork.price %></td>
+      <td><%= order.name %></td>
+      <td><%= link_to 'Show', [:admin, order], class:"btn btn-small" %></td>
+      <td><%= link_to 'Edit', edit_admin_order_path(order), class:"btn btn-small" %></td>
+      <td><%= link_to 'Destroy', [:admin, order], confirm: 'Are you sure?', method: :delete, 
+      class:"btn btn-small" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Artwork', new_admin_artwork_path, class: "btn btn-large" %>

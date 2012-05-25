@@ -1,11 +1,12 @@
 class Admin::OrdersController < AdminController
 
   def index
+    @orders = Order.all;
   end
 
   def show
-    @artwork = Artwork.find(params[:id])
-    @order = Order.find_by_artwork_id(params[:id])
+    @order = Order.find(params[:id])
+    @artwork = @order.artwork
   end
 
   def new
@@ -41,6 +42,17 @@ class Admin::OrdersController < AdminController
     else
       render action: "edit"
     end
+  end
+
+  def destroy
+    @order = Order.find(params[:id])
+    @artwork = @order.artwork
+    @order.destroy
+    if @artwork.sold? 
+      @artwork.toggle!(:sold)
+    end
+    flash[:notice] = "Order cancelled!"
+    redirect_to [:admin, @artwork]
   end
 
 end

@@ -3,7 +3,7 @@ class Admin::ArtworksController < AdminController
 # Clean up routes and secure them
 
   def index
-    @artworks = Artwork.find_all_by_user_id(params[:id])
+    @artworks = Artwork.all;
   end
 
   def show
