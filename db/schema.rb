@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120505190922) do
+ActiveRecord::Schema.define(:version => 20120525081629) do
 
   create_table "artwork_images", :force => true do |t|
     t.integer  "artwork_id"
@@ -24,14 +24,14 @@ ActiveRecord::Schema.define(:version => 20120505190922) do
   add_index "artwork_images", ["artwork_id"], :name => "index_artwork_images_on_artwork_id"
 
   create_table "artworks", :force => true do |t|
-    t.integer  "user_id",                                                     :null => false
-    t.string   "title",                                                       :null => false
-    t.decimal  "price",      :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "user_id",                                                      :null => false
+    t.string   "title",                                                        :null => false
+    t.decimal  "price",      :precision => 10, :scale => 2
     t.string   "medium"
     t.string   "info"
-    t.boolean  "sold",                                     :default => false
-    t.datetime "created_at",                                                  :null => false
-    t.datetime "updated_at",                                                  :null => false
+    t.boolean  "sold",                                      :default => false
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
   end
 
   add_index "artworks", ["user_id"], :name => "index_artworks_on_user_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20120505190922) do
     t.string   "bio"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "avatar"
   end
 
 end

@@ -2,8 +2,17 @@
   <h1><%= @user.name %></h1>
   <p><h2>Admin View</h2></p>
 </div>
+
 <div class="row">
-  <div class="span4">
+  <div class="span6">
+    <div class="thumbnail">
+      <% if @user.avatar? %>
+        <h3>Profile Image</h3>
+        <%= image_tag @user.avatar_url(:profile).to_s %>
+      <% end %>
+    </div>
+  </div>
+  <div class="span6">
     <table class="table table-bordered">
       <tbody>
         <tr>
@@ -25,21 +34,25 @@
       </tbody>
     </table>
 
+
     <%= link_to 'Edit', edit_admin_user_path(@user), class:"btn btn-small" %> |
     <%= link_to 'Add Art', new_admin_artwork_path(user_id: @user.id), class:'btn btn-small' %> | 
     <%= link_to 'Back', admin_users_path, class:"btn btn-small" %>
   </div>
+</div>
 
-  <!-- ARTWORKS -->
-  <div class="span8">
+<!-- ARTWORKS -->
+<div class="row">
+  <div class="span12">
     <table class="table table-striped">
       <thead>
         <tr>
           <th>User</th>
+          <th>ID</th> 
           <th>Title</th>
           <th>Price</th>
           <th>Medium</th>
-          <th></th>
+          <th>Sold?</th>
           <th></th>
           <th></th>
         </tr>
@@ -53,6 +66,7 @@
             <td><%= artwork.title %></td>
             <td><%= artwork.price %></td>
             <td><%= artwork.medium %></td>
+            <td><%= artwork.sold %></td>
             <td><%= link_to 'Show', [:admin, artwork], class:"btn btn-small" %></td>
             <td><%= link_to 'Edit', edit_admin_artwork_path(artwork), class:"btn btn-small" %></td>
             <td><%= link_to 'Destroy', [:admin, artwork], confirm: 'Are you sure?', method: :delete, 

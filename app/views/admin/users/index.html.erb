@@ -6,6 +6,7 @@
     <table class="table table-striped" id="users-view">
         <thead>
             <tr>
+                <th></th>
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Email</th>
@@ -20,6 +21,11 @@
         <tbody>
             <% @users.each do |user| %>
             <tr>
+                <td>
+                    <% if user.avatar? %>
+                        <%= image_tag user.avatar_url(:thumb).to_s %>
+                    <% end %>
+                </td>
                 <td><%= user.first_name %></td>
                 <td><%= user.last_name %></td>
                 <td><%= user.email %></td>

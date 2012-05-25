@@ -1,5 +1,11 @@
 <%= render 'shared/error_messages', object: f.object %>
 
+<%= f.label :profile_image_url, "Image URL" %>
+<%= f.text_field :remote_avatar_url %>
+
+<%= f.label :profile_image, "or Upload your own" %>
+<%= f.file_field :avatar %>
+
 
 <%= f.label :first_name %>
 <%= f.text_field :first_name %>

@@ -19,6 +19,7 @@ class Admin::UsersController < AdminController
   def create
     @user = User.new(params[:user])
     if @user.save
+      UserMailer.registration_confirmation(@user).deliver
       flash[:success] = 'User was successfully created.' 
       redirect_to admin_user_path(@user)
     else
@@ -29,6 +30,7 @@ class Admin::UsersController < AdminController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
+      UserMailer.registration_confirmation(@user).deliver
       flash[:success]= 'User was successfully updated.'
       redirect_to [:admin, @user]
     else
