@@ -23,3 +23,7 @@ doc/
 bundler_stubs/
 /config/database.yml
 .rvmrc
+
+# Ignore other
+/config/initializers/setup_mail.rb
+/config/initializers/stripe.rb
