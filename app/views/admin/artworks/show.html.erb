@@ -1,4 +1,18 @@
 <div class="row">
+  <div class="span4 offset4">
+    <h1>Ordering</h1>
+    <div class="center">
+      <p>
+        <% if @artwork.sold %>
+          <h2>SOLD!</h2>   
+          <%= link_to 'View Order', admin_order_path(artwork_id: @artwork.id), class: "btn btn-large" %>     
+        <% else %>
+          <h2>Available</h2>
+          <%= link_to 'Order now', new_admin_order_path(artwork_id: @artwork.id), class: "btn btn-large btn-primary" %>
+        <% end %>
+      </p>
+    </div>
+  </div>
   <div class="span8 offset2">
     <div class="hero-unit">
       <p>
@@ -25,21 +39,13 @@
       </p>
 
       <p>
+        <b>Info:</b>
+        <%= @artwork.info %>
+      </p>
+
+      <p>
         <%= link_to 'Edit', edit_admin_artwork_path(@artwork), class: "btn btn-small" %> |
         <%= link_to 'Back', admin_user_path(@artwork.user), class: "btn btn-small" %>
-      </p>
-    </div>
-  </div>
-  <div class="span4 offset4">
-    <h1>Ordering</h1>
-    <div class="center">
-      <p>
-        <% if @artwork.sold %>
-          <h2>SOLD!</h2>        
-        <% else %>
-          <%= link_to 'Order now', new_admin_order_path(artwork_id: @artwork.id), class: "btn btn-large btn-primary" %>
-          <h2>Available</h2>
-        <% end %>
       </p>
     </div>
   </div>

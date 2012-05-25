@@ -1,55 +1,54 @@
-<p id="notice"><%= notice %></p>
+<h1>Order [<%= @artwork.title %>]</h1>
 
-<p>
-  <b>Name:</b>
-  <%= @order.name %>
-</p>
+<div class="row">
+  <div class="span8 offset2">
+    <div class="hero-unit">
+      <p>
+        <b>Name:</b>
+        <%= @order.name %>
+      </p>
 
-<p>
-  <b>Email:</b>
-  <%= @order.email %>
-</p>
+      <p>
+        <b>Email:</b>
+        <%= @order.email %>
+      </p>
 
-<p>
-  <b>Address line 1:</b>
-  <%= @order.address_line_1 %>
-</p>
+      <p>
+        <b>Address line 1:</b>
+        <%= @order.address_line_1 %>
+      </p>
 
-<p>
-  <b>Address line 2:</b>
-  <%= @order.address_line_2 %>
-</p>
+      <p>
+        <b>Address line 2:</b>
+        <%= @order.address_line_2 %>
+      </p>
 
-<p>
-  <b>City:</b>
-  <%= @order.city %>
-</p>
+      <p>
+        <b>City:</b>
+        <%= @order.city %>
+      </p>
 
-<p>
-  <b>State:</b>
-  <%= @order.state %>
-</p>
+      <p>
+        <b>State:</b>
+        <%= @order.state %>
+      </p>
 
-<p>
-  <b>Zipcode:</b>
-  <%= @order.zipcode %>
-</p>
+      <p>
+        <b>Zipcode:</b>
+        <%= @order.zipcode %>
+      </p>
 
-<p>
-  <b>Subtotal:</b>
-  <%= @order.subtotal %>
-</p>
-
-<p>
-  <b>Total:</b>
-  <%= @order.total %>
-</p>
-
-<p>
-  <b>Delivery method:</b>
-  <%= @order.delivery_method %>
-</p>
+      <p>
+        <h3>
+          <b>Total:</b>
+          $<%= @artwork.price %>
+        </h3> 
+      </p>
 
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+      <%= link_to 'Edit', edit_admin_order_path(@order), class: "btn btn-small" %> |
+      <%= link_to 'Back', admin_artwork_path(@order.artwork), class: "btn btn-small" %>
+    </div>
+  </div>
+</div>
+

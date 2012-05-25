@@ -8,6 +8,9 @@ class Admin::ArtworksController < AdminController
 
   def show
     @artwork = Artwork.find(params[:id])
+    if @artwork.order.nil? && @artwork.sold
+      @artwork.toggle!(:sold)
+    end
   end
 
   def new

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :bio, :email, :first_name, :last_name, :major, :school
+  attr_accessible :bio, :email, :first_name, :last_name, :major, :school, :avatar
 
   has_many :artworks
   
@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
                     format: {with: VALID_EMAIL_REGEX},
                     uniqueness: { case_sensitive: false }
   
+  mount_uploader :avatar, AvatarUploader
+
   before_save :cleanup                  
 
   def name
@@ -27,6 +29,9 @@ class User < ActiveRecord::Base
 
   def cleanup
     self[:first_name] = self[:first_name].capitalize
-    self[:last_name] = self[:last_name].capitalize  
+    self[:last_name]  = self[:last_name].capitalize 
+    self[:school]     = self[:school].titleize
+    self[:major]      = self[:major].titleize
+    self[:bio]        = self[:bio].capitalize
   end
 end

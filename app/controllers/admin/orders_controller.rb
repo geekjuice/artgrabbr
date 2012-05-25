@@ -4,6 +4,7 @@ class Admin::OrdersController < AdminController
   end
 
   def show
+    @artwork = Artwork.find(params[:id])
     @order = Order.find_by_artwork_id(params[:id])
   end
 
@@ -15,6 +16,7 @@ class Admin::OrdersController < AdminController
 
   def edit
     @order = Order.find(params[:id])
+    @artwork = @order.artwork
   end
 
   def create
@@ -32,25 +34,13 @@ class Admin::OrdersController < AdminController
 
   def update
     @order = Order.find(params[:id])
-
-    respond_to do |format|
-      if @order.update_attributes(params[:order])
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    @artwork = @order.artwork
+   if @order.update_attributes(params[:order])
+      flash[:success] = @artwork.title + %{'s order has been updated!}
+      redirect_to [:admin, @artwork]
+    else
+      render action: "edit"
     end
   end
 
-  def destroy
-    @order = Order.find(params[:id])
-    @order.destroy
-
-    respond_to do |format|
-      format.html { redirect_to orders_url }
-      format.json { head :no_content }
-    end
-  end
 end
