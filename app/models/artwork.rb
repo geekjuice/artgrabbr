@@ -1,5 +1,5 @@
 class Artwork < ActiveRecord::Base
-  attr_accessible :user_id, :medium, :price, :title #user_id...questionable... 
+  attr_accessible :user_id, :medium, :price, :title, :info #user_id...questionable... 
 
   belongs_to :user
   has_many :artwork_images
