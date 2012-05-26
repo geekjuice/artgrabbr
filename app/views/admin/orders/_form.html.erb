@@ -1,6 +1,7 @@
 <%= render 'shared/error_messages', object: f.object %>
 
 <%= f.hidden_field :artwork_id %>
+<%= f.hidden_field :stripe_card_token %>
 
 <%= f.label :name %>
 <%= f.text_field :name %>
@@ -8,21 +9,40 @@
 <%= f.label :email %>
 <%= f.text_field :email %>
 
-<%= f.label :address_line_1 %>
-<%= f.text_field :address_line_1 %>
+<%#= f.label :address_line_1 %>
+<%#= f.text_field :address_line_1 %>
 
-<%= f.label :address_line_2 %>
-<%= f.text_field :address_line_2 %>
+<%#= f.label :address_line_2 %>
+<%#= f.text_field :address_line_2 %>
 
-<%= f.label :city %>
-<%= f.text_field :city %>
+<%#= f.label :city %>
+<%#= f.text_field :city %>
 
-<%= f.label :state %>
-<%= f.text_field :state %>
+<%#= f.label :state %>
+<%#= f.text_field :state %>
 
-<%= f.label :zipcode %>
-<%= f.text_field :zipcode %>
+<%#= f.label :zipcode %>
+<%#= f.text_field :zipcode %>
 
+<<<<<<< HEAD
+=======
+<%# if @order.stripe_card_token.present? %>
+	<!-- Credit card has been provided. -->
+<%# else %>
+	<%= label_tag :card_number, "Credit Card Number" %>
+	<%= text_field_tag :card_number, nil, name: nil %>
+
+	<%= label_tag :card_code, "Security Code on Card (CVV)" %>
+	<%= text_field_tag :card_code, nil, name: nil %>
+
+	<%= label_tag :card_month, "Card Expiration" %>
+	<%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
+	<%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
+<%# end %>
+<div id="stripe_error">
+	<noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+</div>
+>>>>>>> stripe-implementation
 <%#= f.label :delivery_method %>
 <%#= f.text_field :delivery_method %>
 

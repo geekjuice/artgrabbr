@@ -9,8 +9,8 @@ class CreateOrders < ActiveRecord::Migration
       t.string :city
       t.string :state
       t.string :zipcode
-      t.decimal :subtotal,        :precision => 8, :scale => 2, :default => 0.0
-      t.decimal :total,           :precision => 8, :scale => 2, :default => 0.0
+      t.decimal :subtotal,        :precision => 8, :scale => 2, :default => 0.00
+      t.decimal :total,           :precision => 8, :scale => 2, :default => 0.00
       t.string :delivery_method
 
       t.timestamps
