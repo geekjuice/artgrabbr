@@ -12,7 +12,8 @@ Artgrabbr::Application.routes.draw do
 # ADMIN ACCESS
   namespace :admin, :path => "payphone" do
     resources :users
-    resources :artworks 
+    resources :artworks
+    resources :artwork_images
     resources :orders
 
     root to:'users#index'

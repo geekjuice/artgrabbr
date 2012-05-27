@@ -33,9 +33,8 @@
                 <td><%= user.major %></td>
                 <td><%= user.bio %></td>
                 <td><%= link_to 'Show', [:admin, user], class: "btn btn-small" %></td>
-                <td><%= link_to 'Edit', edit_admin_user_path(user), class: "btn btn-small" %></td>
-                <td><%= link_to 'Delete', [:admin, user], confirm: 'Are you sure?', method: :delete, 
-                        class: "btn btn-small" %></td>
+                <td><%= link_to 'Edit', edit_admin_user_path(user), class: "btn btn-small btn-info" %></td>
+                <td><%= link_to 'Delete', [:admin, user], confirm: 'Are you sure?', method: :delete, class: "btn btn-small btn-danger" %></td>
             </tr>
             <% end %>
         </tbody>

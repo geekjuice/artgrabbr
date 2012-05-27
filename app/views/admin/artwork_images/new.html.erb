@@ -1,0 +1,29 @@
+<h1>Add Artwork Image for <%= @artwork.title %></h1>
+
+<div class="row">
+  <div class="span8 offset2">
+    <div class = "hero-unit">
+
+    <%= form_for([:admin, @artwork_image], :html => {:multipart => true}) do |f| %>
+
+      <%= f.hidden_field :artwork_id %>
+
+      <%= f.label :remote_image_url, "Image URL" %>
+      <%= f.text_field :remote_image_url %>
+    
+      <%= f.label :artwork_image, "or Upload your own" %>
+      <%= f.file_field :image %>
+
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+
+      <div>
+        <%= f.submit "Submit", class: "btn btn-large btn-primary"%>
+        <%= link_to 'Back', [:admin, @artwork], class: "btn btn-large" %>
+      </div>
+
+    <% end %> 
+
+    </div>
+  </div>
+</div>

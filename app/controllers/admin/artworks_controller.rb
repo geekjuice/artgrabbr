@@ -8,6 +8,9 @@ class Admin::ArtworksController < AdminController
 
   def show
     @artwork = Artwork.find(params[:id])
+    if ArtworkImage.find_all_by_artwork_id(@artwork.id)
+      @artworkimage = ArtworkImage.find_all_by_artwork_id(@artwork.id)
+    end
     if @artwork.order.nil? && @artwork.sold
       @artwork.toggle!(:sold)
     end
@@ -40,7 +43,7 @@ class Admin::ArtworksController < AdminController
     @user = @artwork.user
     if @artwork.update_attributes(params[:artwork])
       flash[:success] = @user.name + %{'s artwork updated!}
-      redirect_to [:admin, @user]
+      redirect_to [:admin, @artwork]
     else
       render action: "edit"
     end

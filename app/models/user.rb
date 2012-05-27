@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  attr_accessible :bio, :email, :first_name, :last_name, :major, :school, :avatar, :remote_avatar_url
+  attr_accessible :bio, :email, :first_name, :last_name, :major, 
+                  :school, :avatar, :remote_avatar_url
 
   has_many :artworks
   

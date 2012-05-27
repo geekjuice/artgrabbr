@@ -68,9 +68,9 @@
             <td><%= artwork.medium %></td>
             <td><%= artwork.sold %></td>
             <td><%= link_to 'Show', [:admin, artwork], class:"btn btn-small" %></td>
-            <td><%= link_to 'Edit', edit_admin_artwork_path(artwork), class:"btn btn-small" %></td>
+            <td><%= link_to 'Edit', edit_admin_artwork_path(artwork), class:"btn btn-small btn-info" %></td>
             <td><%= link_to 'Destroy', [:admin, artwork], confirm: 'Are you sure?', method: :delete, 
-            class:"btn btn-small" %></td>
+            class:"btn btn-small btn-danger" %></td>
           </tr>
         <% end %>
       </tbody>

@@ -22,7 +22,6 @@ class Admin::OrdersController < AdminController
 
   def create
     @artwork = Artwork.find(params[:order][:artwork_id])
-    # @order = @artwork.build_order(params[:order], artwork: @artwork)
     @order = Order.new(params[:order])
     if @order.save_with_payment
       @artwork.toggle!(:sold)

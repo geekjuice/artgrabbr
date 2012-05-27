@@ -1,0 +1,6 @@
+To-Do
+
+- Make artwork_image dependent on Artwork (delete artwork -> delete artwork_image)
+- Make artwork dependent on users (delete user -> delete artwork -> delete artwork_image)
+- Refactor artwork_image form
+- Create public side access (makinly views and eventually create/destroy/etc)
