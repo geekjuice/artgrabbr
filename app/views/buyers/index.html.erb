@@ -1,0 +1,29 @@
+<h1>Listing buyers</h1>
+
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Email</th>
+    <th>Inquirycount</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @buyers.each do |buyer| %>
+  <tr>
+    <td><%= buyer.first_name %></td>
+    <td><%= buyer.last_name %></td>
+    <td><%= buyer.email %></td>
+    <td><%= buyer.inquirycount %></td>
+    <td><%= link_to 'Show', buyer %></td>
+    <td><%= link_to 'Edit', edit_buyer_path(buyer) %></td>
+    <td><%= link_to 'Destroy', buyer, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Buyer', new_buyer_path %>

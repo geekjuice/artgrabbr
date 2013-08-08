@@ -1,0 +1,33 @@
+<h1>Buyers</h1>
+
+<table class="table table-striped">
+  <thead>
+     <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Inquiries Remaining</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @buyers.each do |buyer| %>
+    <tr>
+      <td><%= buyer.first_name %></td>
+      <td><%= buyer.last_name %></td>
+      <td><%= buyer.email %></td>
+      <td><%= (5 - inquirycount?(buyer)).to_s %></td>
+      <td><%= link_to 'Show', [:admin, buyer], class:"btn btn-small" %></td>
+      <td><%= link_to 'Edit', edit_admin_buyer_path(buyer), class:"btn btn-small" %></td>
+      <td><%= link_to 'Destroy', [:admin, buyer], confirm: 'Are you sure?', method: :delete, 
+      class:"btn btn-small" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Buyer', new_buyer_path, class: "btn btn-large" %>

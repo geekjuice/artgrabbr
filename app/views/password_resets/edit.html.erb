@@ -1,0 +1,33 @@
+<div class="container-content">
+  <h1 class="center">Password Reset</h1>
+  <div class="row">
+    <div class="span8 offset2">
+      <div class = "hero-unit signup">
+        <%= form_for @buyer, :url => password_reset_path(params[:id]) do |f| %>
+        <% if @buyer.errors.any? %>
+          <% if @buyer.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@buyer.errors.count, "error") %> prohibited this buyer from being saved:</h2>
+
+              <ul>
+              <% @buyer.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+        <% end %>
+        <div class="field">
+          <%= f.label :password %>
+          <%= f.password_field :password %>
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation %>
+        </div>
+        <div class="actions"><%= f.submit "Update Password", class:"btn-custom" %></div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<% @artworks.each do |artwork| %>
+    <li class="span6 thumbholder">
+        <% if !artwork.artwork_images.empty? %>
+            <%= link_to image_tag(artwork.artwork_images.find_by_showcaseimage(:true).image_url(:carousel).to_s), artwork, class:"thumbnail" %> 
+        <% else %>
+            <%= link_to image_tag('http://placehold.it/620x450.png'), artwork, class: "thumbnail" %>
+        <% end %>
+
+        <% if artwork.sold? %>
+            <div class="sold_index">
+                <%= link_to image_tag('sold.png'), artwork %>
+            </div>
+
+        <% elsif has_inquiry?(artwork) %>
+            <div class="salepending">
+                <%= image_tag('pending.png') %>
+            </div>
+            <div class="numberpending">
+                <%= pluralize(artwork.orders.count, 'request') %> pending
+            </div>
+            <div class="pricetag">
+                <%= image_tag('pricetag.png') %>
+                <div class="price">
+                   $<%= artwork.price %>
+                </div>
+            </div>
+        <% else %>
+            <div class="pricetag">
+            	<%= image_tag('pricetag.png') %>
+            	 <div class="price">
+            	 	$<%= artwork.price %>
+            	 </div>
+            </div>
+        <% end %> 
+        <!-- <div class="cap"><%#= artwork.artwork_images.find_by_showcaseimage(:true).id %> | <%= artwork.title %></div> -->
+        <div class="cap"><%= artwork.title if artwork.title %></div>
+        <div class="sig"><%= link_to 'by ' + artwork.user.first_name + ' ' + artwork.user.last_name[0], artworks_path(artist: artwork.user.id) %></div>
+    </li>
+<% end %>

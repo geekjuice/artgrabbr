@@ -1,0 +1,7 @@
+$("#thumbs").append('<%= j render("thumbs") %>');
+
+<% if (@artworks.current_page < @artworks.num_pages) %>
+	$('#paginateBottom').replaceWith('<div id="paginateBottom"><%= j paginate @artworks %></div>');
+<% else %>
+	$('#paginateBottom').remove();
+<% end %>

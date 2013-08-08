@@ -1,0 +1,30 @@
+<div class="modal hide fade" id="modal">
+  <div class="modal-header">
+    <div class="modal-title">
+      Accept artGrab request
+    </div>
+  </div>
+  <%= form_tag (acceptEmail_admin_order_path(orderid: order.id)) do |f| %>
+  <div class="modal-body">
+    <div class="row clear-left-margin">
+      <div class="googlemapwide">
+        <%= image_tag 'mapshadowwide.png', id:'shadowwide' %>
+        <%= image_tag "http://maps.google.com/maps/api/staticmap?scale=2&size=610x210&sensor=false&zoom=15&markers=size:mid%7C#{@user.latitude}%2C#{@user.longitude}", id: "mapwide" %>
+      </div>
+
+      <h2 id="artistmessage">Message to Buyer:</h2>
+      <%= text_area_tag :messageToBuyer, nil,  :rows => 20 %>
+        <%#= f.label :inquirymessage, 'Tip: Include available dates and times for pickup'%>
+        <%#= f.text_area :inquirymessage, id:'messagecontent'  %>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="btn-modal-container">
+      <%= submit_tag "Submit", id: "inquirysubmit", class: "btn-input btn-custom" %>
+      <%#= link_to "Submit", acceptEmail_admin_order_path(orderid: order.id), id: "inquirysubmit", class: "btn-modal btn-input btn-custom" %>
+      <%= link_to 'Cancel', '#', id: "inquirycancel", 'data-dismiss' => 'modal', class:'btn-modal btn-custom-cancel' %>
+    </div>
+  </div>
+  <% end %>
+</div>

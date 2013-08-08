@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= full_title(yield(:title))%></title>
+	<%= stylesheet_link_tag     "application", media: "all" %>
+	<%#= javascript_include_tag "https://js.stripe.com/v1/", "application" %>
+	<%= javascript_include_tag	"application" %>
+	<%= csrf_meta_tags %>
+	<%#= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+	<%= render 'layouts/shim' %>
+	<%= render 'layouts/fonts' %>
+	
+</head>
+<body>
+	<% if ApplicationHelper::CONSTRUCTION == true && !admin?(request.fullpath) && Rails.env.production? %>
+		<%= render 'layouts/construction2'%>
+	<%# elsif ApplicationHelper::CONSTRUCTION == true && Rails.env.production? && !admin?(request.fullpath)%>
+	<%# if ApplicationHelper::CONSTRUCTION == true && Rails.env.development? %>
+		<%#= render 'layouts/construction'%>
+		<%#=  render 'layouts/footer' %>
+		<%#=  render 'layouts/ga_production' if Rails.env.production? %>
+		<%#=  render 'layouts/ga_staging' if Rails.env.staging? %>
+	<% else %>
+		<%= render 'layouts/live' %>
+		<%=  render 'layouts/footer' %>
+		<%=  render 'layouts/ga_production' if Rails.env.production? %>
+		<%=  render 'layouts/ga_staging' if Rails.env.staging? %>
+	<% end %>
+	
+</body>	
+</html>

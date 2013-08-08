@@ -1,0 +1,32 @@
+<%= render 'shared/error_messages', object: f.object %>
+
+<%= image_tag(@user.avatar_url(:profile)) if @user.avatar? %>
+
+<%= f.label :profile_image_url, "Image URL" %>
+<%= f.text_field :remote_avatar_url %>
+
+<%= f.label :profile_image, "or Upload your own" %>
+<%= f.file_field :avatar %>
+<%= f.hidden_field :avatar_cache %>
+
+<%= f.label :first_name %>
+<%= f.text_field :first_name %>
+
+<%= f.label :last_name %>
+<%= f.text_field :last_name %>
+
+<%= f.label :email %>
+<%= f.text_field :email %>
+
+<%= f.label :pickup_location %>
+<%= f.text_field :pickup_location %>
+
+<%= f.label :school %>
+<%= f.text_field :school %>
+
+<%= f.label :major %>
+<%= f.text_field :major %>
+
+<%= f.label :bio %>
+<%= f.text_field :bio %>
+

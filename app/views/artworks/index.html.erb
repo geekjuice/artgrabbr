@@ -1,0 +1,25 @@
+<ul class="thumbnails">
+	<div id="optionsbar">
+		<% ordering_toggle %>
+		<div class="btn-container">
+			<%= link_to 'Random Art', Artwork.find(Artwork.find_all_by_sold(false).map(&:id).sample), class:'btn-custom btnsort'%>
+		</div>
+		<div class="btn-container">
+			<%= link_to 'Shuffle', artworks_path(shuffle: 1), class:'btn-custom btnsort'%>
+		</div>
+		<div class="btn-container">
+			<%= link_to @price_text, artworks_path(price: @price_order), class:'btn-custom btnsort' %>
+		</div>
+		<div class="btn-container">
+			<%= link_to @sold_text, artworks_path(sold: @sold_order), class:'btn-custom btnsort' %>
+		</div>
+	</div>
+    <div id="thumbs">
+        <%= render 'thumbs'%>
+    </div>
+</ul>
+<div id="paginateBottom">
+	<%= paginate @artworks %>
+</div>
+
+

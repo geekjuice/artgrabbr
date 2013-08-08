@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="span4 offset4">
+    <h1>Ordering</h1>
+    <div class="center">
+      <p>
+        <% if @artwork.sold %>
+          <div id="sold">SOLD!</div>   
+          <%= link_to 'View Order', @artwork.order, class: "btn btn-large btn-info" %>     
+        <% else %>
+          <h2>Available</h2>
+          <%= link_to 'Order now', new_order_path(artwork_id: @artwork.id), class: "btn btn-large btn-primary" %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+  <div class="span12">
+    <div class="hero-unit">
+      <p>
+        <b>User ID:</b>
+        <%= User.find(@artwork.user_id).name %>
+      </p>
+      <p>
+        <b>User Check (Debug)</b>
+        <%= @artwork.user.name %>
+      </p>
+      <p>
+        <b>Title:</b>
+        <%= @artwork.title %>
+      </p>
+
+      <p>
+        <b>Price:</b>
+        $<%= @artwork.price %>
+      </p>
+
+      <p>
+        <b>Medium:</b>
+        <%= @artwork.medium %>
+      </p>
+
+      <p>
+        <b>Info:</b>
+        <%= @artwork.info%>
+      </p>
+
+      <p>
+        <%= link_to 'Back', user_path(@artwork.user), class: "btn btn-small" %>
+      </p>
+    </div>
+  </div>
+  <div class="span12">
+    <ul class="thumbnails">
+      <% @artworkimage.each do |image| %>
+        <li class="span4">
+          <div class="thumbnail">
+            <%= image_tag image.image_url(:thumb).to_s %>
+            <h4><%= image.description %></h4>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div> 
+
+	<div class="span8	offset2">
+	  <div id="myCarousel" class="carousel slide">
+	  	<!-- Carousel items -->
+	  	<div class="carousel-inner">
+	  		<!-- <div class="active item">…</div>
+	  		<div class="item">…</div>
+	  		<div class="item">…</div> --> 
+        <div class="h1">
+          Carousel
+        </div>
+		    <% @artworkimage.each_with_index do |image, index| %>
+			    <div class="item <% if index == 0 %>active<% end %>">
+	           <%= link_to(image_tag(image.image_url(:carousel)), image.image_url ) %>
+	           <div class="carousel-caption">
+	           		<p><%= index %></p>
+	           </div>
+	        </div>
+				<% end %> 
+	  	</div>
+	  	<!-- Carousel nav -->
+	  	<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+	  	<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+	  </div>
+	</div>
+
+
+</div>

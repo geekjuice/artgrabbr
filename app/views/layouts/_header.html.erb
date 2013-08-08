@@ -1,0 +1,18 @@
+<div id="header">
+	<div class="container container-header">
+		<div class="full-col">
+		<h1 id="navbarlogo">
+			<%= link_to "ArtGrabbr", artworks_path(shuffle: 1), id:'headerlogo' %>
+			<!-- <a href="/">
+				<div id="headerlogo"> ArtGrabbr</div>
+			</a> -->
+		</h1>
+		<nav id="mainmenu">
+			<ul>
+				<%= render 'layouts/betaheader' %>
+				<%#= render 'layouts/fullaccessheader' %>
+			</ul>
+		</nav>
+	</div>
+	</div>
+</div>

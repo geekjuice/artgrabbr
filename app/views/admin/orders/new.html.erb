@@ -1,0 +1,17 @@
+<h1>New order</h1>
+<h2>Title: <%= @artwork.title %></h2>
+<h2>by: <%= @artwork.user.name %></h2> 
+<h2>Artwork ID: <%= @order.artwork_id %></h2>
+
+<div class="row">
+	<div class="span8 offset2">
+		<div class = "hero-unit">
+			<%= form_for([:admin, @order], :html => {:id => :new_order} ) do |f| %>
+				<%= render 'orderform', f: f %>
+				<h1>Total: <%= @artwork.price%></h1></br>
+				<%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+				<%= link_to 'Back', [:admin, @artwork], class:'btn btn-large' %>
+			<% end %>
+		</div>
+	</div>
+</div>

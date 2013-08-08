@@ -1,0 +1,18 @@
+<% @artworkimage.each do |image| %>
+    <li class="span6 thumbholder">
+        <%= link_to image_tag(image.image_url(:carousel).to_s), "#"+@artworkimage.first.artwork.title.squeeze(" ").squeeze(" ").strip.gsub!(" ", "_"), {:remote => true, 'data-toggle' => 'modal', class:"thumbnail center"} %> 
+
+        <div class="sold"><%#= image_tag('sold2.png') %></div>
+        <div class="cap"><%= image.id %> | <%= image.artwork.title %></div>
+        <div class="sig">by <%= image.artwork.user.name %></div>
+    </li>
+
+    <div class="modal hide fade" id="<%= @artworkimage.first.artwork.title.squeeze(" ").squeeze(" ").strip.gsub!(" ", "_") %>">
+		<div class="modal-body">
+			<%= image_tag(image.image_url(:carousel).to_s) %>
+			<h1><%= image.artwork.title %></h1>
+		</div>
+	</div>
+
+<% end %>
+

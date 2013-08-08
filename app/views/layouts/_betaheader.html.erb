@@ -1,0 +1,66 @@
+<li><%= link_to 'Artworks', artworks_path(shuffle: 1) %></li>
+<li><%= link_to 'About', about_path %></li>
+<li><%= link_to 'How it works', howitworks_path %></li>
+<li><%= link_to 'FAQ', faq_path %></li>
+<li><%= link_to 'Contact', contact_path %></li>
+<!-- <li><%#= link_to 'Sign in', signin_path %></li> -->
+
+<li class="dropdown" id="menu1">
+
+	<% if admin?(request.fullpath) %>
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+			<strong>Admin Mode</strong> <b class="caret"></b>
+		</a>
+		<ul class="dropdown-menu" id="dropdown-signedin">
+			<li class="signedinlist">
+		    	<%= link_to "Artists", admin_users_path %>
+		    </li>
+		    <li class="signedinlist">
+		    	<%= link_to "Artworks", admin_artworks_path %>
+		    </li>
+		    <li class="signedinlist">
+		    	<%= link_to "Orders", admin_orders_path %>
+		    </li>
+		    <li class="signedinlist">
+		    	<%= link_to "Buyers", admin_buyers_path %>
+		    </li>
+		    <li class="signedinlist">
+		    	<%= link_to "Exit admin mode", root_path %>
+		    </li>
+		</ul>
+
+	<% elsif signed_in? %>
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+			<strong><%= current_buyer.name %></strong> <b class="caret"></b>
+		</a>
+		<ul class="dropdown-menu" id="dropdown-signedin">
+			<li class="signedinlist">
+		    	<%= link_to "My account", buyer_path(current_buyer) %>
+		    </li>
+		    <li class="signedinlist">
+		    	<%= link_to "Edit profile", edit_buyer_path(current_buyer) %>
+		    </li>
+			<li class="signedinlist">
+		    	<%= link_to "Sign out", signout_path, method: "delete" %>
+		    </li>
+		</ul>
+
+	<% else %>
+	    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+			Have an account? <strong>Sign in</strong><b class="caret"></b>
+		</a>
+		<ul class="dropdown-menu" id="dropdown-signin">
+			<div id="signinform">
+				<%= render 'layouts/signinform' %>
+			</div>
+			<footer class="menusigninfooter">
+				<div id="newuserheader">
+					New user? <%= link_to 'Sign up now!', new_buyer_path %>
+				</div>
+				<div id="newuserheader">
+					Forgot password? <%= link_to 'Reset password', new_password_reset_path %>
+				</div>
+			</footer>
+		</ul>
+	<% end %>
+</li>

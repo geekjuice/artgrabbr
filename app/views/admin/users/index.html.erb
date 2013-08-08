@@ -1,0 +1,18 @@
+<div class="hero-unit">
+    <h1>Artists</h1>
+    <p><h2>Admin View</h2></p>
+    <%= link_to "New artist", new_admin_user_path, class: 'btn-custom' %>
+</div>
+
+<div class="artist-list">
+<% @users.each do |user| %>
+    <div class="banner-holder" >
+        <div class="main-banner" >
+            <%= link_to [:admin, user], class:"banner-title" do %><%= user.name %><% end %>
+            <%= link_to 'Delete', [:admin, user], confirm: 'Are you sure?', method: :delete, class: "artist-delete" %>
+            <%= link_to 'Edit', edit_admin_user_path(user), class: "artist-edit" %>
+            <span class="artist-pending">(<%= total_artist_inquiries(user.id) %> Inquiries)</span>
+        </div>
+    </div>
+<% end %>
+</div>

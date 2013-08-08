@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>ArtGrabbr</title>
+	<style type="text/css">
+		body, td { 	color:#eeeeee; 
+					font-size:15px; 
+					font-family:Verdana,Helvetica,Arial; }
+		h1 { 	font-size: 20px;
+				font-weight: 150;}
+		#headerlogo{
+			background: #497582;
+		}
+		#background{
+			background: #eee;
+			padding: 100px 0px;}
+		#main{ 	background: #ffffff
+				padding: 15px;
+				border-top: 1px solid #ccc;
+				border-left: 1px solid #ccc;
+				border-right: 1px solid #ccc;
+				}
+		#mainbutton{ 	background: #fff5f6;
+						padding:0px 30px 15px 30px;
+						border-left: 1px solid #ccc;
+						border-right: 1px solid #ccc;}
+		#artimage{	width: 50px;}
+		#message > a {
+			color: #d8a55d;
+			text-decoration:underline;
+			border-left: 1px solid #ccc;
+			border-right: 1px solid #ccc;
+		}
+		div#button{	background: #ebc48d;
+					border-radius: 2px 2px 2px;
+					border: 1px solid #d8a55d;
+					padding:12px;
+					color: #ffffff;
+					font-size:16px;
+					text-shadow: 0px -1px 0px #999999;
+					text-align: center;}
+		a{text-decoration:none;}
+		#footer{
+				<!-- background: #e8d6d8 -->;
+				background: #497582;
+				padding:0px 15px;
+				border-bottom: 1px solid #ccc;
+				border-left: 1px solid #ccc;
+				border-right: 1px solid #ccc;
+			}
+		#footerartimage{	width: 40px;}
+		#footermsg{	width: 435px;
+					padding-left:0px;
+					font-size:9px;
+					color:#888888;}
+	</style>
+</head>
+<body>
+	<table width="100%" id="background" border="0" cellpadding="0" cellspacing="0">
+		<tr><td align="center" valign="top">
+			<table width="600" id="headerlogo" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td valign="top">
+						<%= image_tag 'emaillogo.png', id:'logo', alt: 'ArtGrabbr', height: '189px', width: '400px'%>
+					</td>
+				</tr>
+			</table>
+			<table width="600" id="main" border="0" cellpadding="0" cellspacing="15">
+				<tr>
+					<td>
+						<h1>Welcome <%= @buyer.first_name %>!</h1>
+					</td>
+				</tr>
+				<tr>
+					<td id="message" valign="top">
+						<p>Thanks for joining Artgrabbr. Not only will you be helping your local student artists, but also grabbing high-quality artworks for great prices. Before you can grab art though, please click the link below to validate your existence. We promised it's not that we don't trust you, but we just want to keep the robots at bay!</p>
+					</td>
+				</tr>
+			</table>
+			<table width="600" id="mainbutton" border="0" cellpadding="0" cellspacing="0">	
+				<tr>
+					<td align="left">
+						<%#= link_to validate_buyer_url(buyerid: @buyer.id), confirmationode: @buyer.confirmation_code do %>
+						<%#= url_for :controller => "Buyers", :action => 'validate' do %>
+						<a href="<%= buyer_url(@buyer) %>/validate/?confirmationcode=<%= @buyer.validation_code %>" >
+							<div id="button">
+								<strong>Verify account</strong>
+							</div>
+						<%# end %>
+						</a>
+					</td>
+				</tr>
+			</table>
+			<table width="600" id="footer" border="0" cellpadding="0" cellspacing="15">
+				<tr>
+					<td id="artimage" valign="top">
+						<%= image_tag 'logo_thumbnail.png', id:'homelogo', alt: 'ArtGrabbr', height: '40px', width: '40px'%>
+					</td>
+					<td id="footermsg" valign="top">ArtGrabbr 2012</td>	
+				</tr>
+			</table>
+		</td></tr>
+	</table>
+</body>
+</html>

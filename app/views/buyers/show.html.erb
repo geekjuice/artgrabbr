@@ -1,0 +1,73 @@
+<div class="hero-unit">
+	<h1><%= current_buyer.name %></h1>
+    <h2 class="buyerstatus">Account Status: 
+        <% if current_buyer.validated? %>
+            <span class="verified">Verified</span>
+            <p class="inquiryremain">Inquries remaining: 
+                <span class="value"><%= (5 - inquirycount).to_s %></span>
+            </p>
+        <% else %>
+            <span class="not_verified">Not Verified</span>
+            <p><%= link_to 'Resend', reverification_buyer_path(@buyer) %> verification email?</p>
+        <% end %>
+    </h2>
+</div>
+
+<h2 class="current-inquiry">Current Inquiries</h2>
+<div class="inquiries">
+<% @orders.each do |order| %>
+    <% artwork = Artwork.find(order.artwork_id) %>
+    <% image = ArtworkImage.find_by_artwork_id_and_showcaseimage(artwork.id, true) %>
+    <div class="banner-holder inquiryfix" id="banner<%= artwork.id%>">
+        <div class="main-banner" id="<%= image.id if image %>">
+            <div class="banner-title"><%= artwork.title %></div>
+            <div class="inquiry-price">$<%= artwork.price %></div>
+            <div class="inquiry-status">
+                <%= "<span class='accepted'>".html_safe if order.status == 'Accepted' %>
+                <%= "<span class='declined'>".html_safe if order.status == 'Declined' %>
+                    <%= order.status %>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="single-inquiry" id="banner<%= artwork.id%>-inquiry">
+        <div class="artholder">
+            <% if image %>
+                <%= link_to (image_tag image.image_url(:thumb).to_s, width: '200px'), artwork %> 
+            <% else %>
+                <%= link_to (image_tag "http://www.placehold.it/200x200.png", width: '200px'), artwork %>
+            <% end %>
+        </div>
+        <div class="orderinfo">
+            <h2>Inquiry message:</h2>
+            <h3 class="ordermessage"><%= order.inquirymessage %></h2>
+        </div>
+        <div class="orderlocation">
+            <h2>Approximate Pick-up Location:</h2>
+            <h3>
+                <%= artwork.user.pickup_location %>
+                <%= link_to '[View in Google Maps]', "https://maps.google.com/maps?q=#{artwork.user.pickup_location.split(' ').join('+')}", target: "_blank", class:"gmaplink"  %>
+            </h3>
+        </div>
+        <div class="orderprice">
+            <!-- make into separate class -->
+            <h2>Requested Price: <span style='color: rgb(70, 165, 70);font-size: 1.2em;'>$<%= order.requested_price %></span></h2>
+        </div>
+        <div class="orderoption">
+            <!-- Sold! -->
+            <% if artwork.sold? %>
+                <%#= link_to 'Not Sold?', sold_artwork_path(artwork), class: "btn-custom-small" %>
+                <div class="btn-custom-small custom-disabled">Cancel order</div>
+            <% else %>
+                <%#= link_to 'Sold?', sold_artwork_path(artwork), class: "btn-custom-small" %> 
+                <%= link_to 'Cancel order', order, confirm: 'Are you sure?', method: :delete, class: "btn-custom-small custom-cancel" %>
+            <% end %>
+            <%= link_to "View artwork", artwork , class: "btn-custom-small" %>
+        </div>
+    </div>
+<% end %>
+<% if @orders.empty? %>
+    <h2 class="center">No requests at the moment</h2>
+<% end %>
+</div>
+

@@ -1,0 +1,19 @@
+<div class="container-content">
+	<div class="row center">
+		<h1>Editing artwork</h1>
+
+		<div class="span8 offset2">
+			<div class="hero-unit">
+				<%= form_for([:admin, @artwork]) do |f| %>
+				<%= render 'artworkform', f: f %>
+				<%= f.submit "Submit", class: "btn btn-large btn-primary"%>
+				<p>
+					<%= link_to 'Show', [:admin, @artwork], class: "btn btn-small" %>
+					<%= link_to 'Back', admin_user_path(@artwork.user), class: "btn btn-small" %>
+				</p>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+

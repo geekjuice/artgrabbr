@@ -1,0 +1,27 @@
+<%= render 'shared/error_messages', object: f.object %>
+
+<%= f.hidden_field :artwork_id %>
+<%= f.hidden_field :buyer_id %>
+
+<%#= f.label :name %>
+<%#= f.text_field :name, readonly: true %>
+<%= f.hidden_field :name %>
+
+<%#= f.label :email %>
+<%#= f.text_field :email, readonly: true %>
+<%= f.hidden_field :email %>
+
+<div class="googlemapwide">
+	<%= image_tag 'mapshadowwide.png', id:'shadowwide' %>
+	<%= image_tag "http://maps.google.com/maps/api/staticmap?scale=2&size=610x210&sensor=false&zoom=15&markers=size:mid%7C#{@user.latitude}%2C#{@user.longitude}", id: "mapwide" %>
+</div>
+
+<h2 id="artistmessage">Message to artist: <small id="messagetip">Tip</small></h2>
+<%= f.text_area :inquirymessage, id:'messagecontent'  %>
+
+
+<h2 id="artistmessage">Requested Price: <small id="pricetip">Tip</small></h2>
+
+<span id='addonleft'>$</span>
+<%= f.text_field :requested_price, id: 'requestedprice', value: @artwork.price, class:'formaddons span3' %>
+<span id='addonright'>.00</span>

@@ -1,0 +1,22 @@
+<%= render 'shared/error_messages', object: f.object %>
+
+	<%#= f.label :user_id %>
+	<%#= f.text_field :user_id %>
+
+	<%= f.hidden_field :user_id %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title, placeholder: "Ex: A Starry Night" %>
+
+  <%= f.label :suggested_price %>
+  <%= f.text_field :price, placeholder: "Ex: 5, 25, 100..." %>
+
+  <%= f.label :medium %>
+  <%= f.text_field :medium, placeholder: "Ex: Oil on canvas..." %>
+
+  <%= f.label :size %>
+  <%= f.text_field :size, placeholder: 'Ex: 5"x12"...' %>
+
+  <%= f.label :info %>
+  <%= f.text_field :info, placeholder: "About your work..." %>
+

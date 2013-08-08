@@ -1,0 +1,155 @@
+<div class="container-content showart">
+  <div class="artheader">
+    <div class="inner">
+      <h1><%= @artwork.title %> <small>by <%= @artwork.user.first_name + ' ' + @artwork.user.last_name[0] + '.' %></small></h1>
+    </div>
+  </div>
+  <div class="row artcontent">
+    <div class="span3 column">
+      <div class="left-column-inner">
+        <% if @artwork.sold? %> 
+          <div class="leftsold"><%= image_tag 'leftsold.png' %></div>
+        <% end %>
+        <table class="table artworkinfo">
+          <thead class="artinfo">
+            <tr>
+              <th>Artist:</th><td class="artist"><%= @artwork.user.first_name + ' ' + @artwork.user.last_name[0] + '.' %></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Price:</th><td class="price">$<%= @artwork.price %></td>
+            </tr>
+            
+            <% if @artwork.medium? %>
+              <tr>
+                <th>Medium:</th><td><%= @artwork.medium %></td>
+              </tr>
+            <% end %>
+
+            <% if @artwork.size? %>
+              <tr>
+                <th>Size:</th><td><%= @artwork.size %></td>
+              </tr>
+            <% end %>
+
+            <tr>
+              <th>Location:</th><td class=""><%= @artwork.user.pickup_location %></td>
+            </tr>
+          </tbody>
+
+          <% if @artwork.info? %>
+            <thead class="abouttheart">
+              <tr>
+                <!-- <th colspan="2">About the art</th> -->
+                <th colspan="2">Artwork Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="2">
+                  <%= @artwork.info %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+
+          <thead class="abouttheart">
+            <tr>
+              <!-- <th colspan="2">About the art</th> -->
+              <th colspan="2">Pickup Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="2">
+                <%#= @artwork.info %>
+                <div class="googlemap">
+                  <%= image_tag 'mapshadow.png', id:'shadow' %>
+                  <%= image_tag "http://maps.google.com/maps/api/staticmap?scale=2&size=210x210&sensor=false&zoom=15&markers=size:mid%7C#{@user.latitude}%2C#{@user.longitude}", id: "map", height: "210px", width:"210px" %>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+        <div id='inquirybutton'>
+          <% if !@artwork.sold? %>
+            <% if signed_in? %>
+              <% if current_buyer.validated? %>
+                <% if inquiredalready?(@artwork) %>
+                  <div class="btn-custom-disabled">Sale Pending</div>
+                  <%= link_to 'Cancel Grab?', current_order(@artwork), class: 'btn-custom-cancel btngrab', :confirm => "Are you sure?", method: :delete %>
+
+                <% elsif toomanyinquiries? %>
+                  <%= link_to 'Grab it?', '#limitexceeded', {:remote => true, 'data-toggle' => 'modal', class:'btn-custom btngrab', style:"display: block;"} %>
+
+                <%# elsif has_inquiry?(@artwork) %>
+                  <!-- <div class="btn-custom-disabled">Sale Pending</div> -->
+
+                <% else %>
+                  <%= link_to 'Grab it?', '#modal', {:remote => true, 'data-toggle' => 'modal', class:'btn-custom btngrab', style:"display: block;"}  %>
+                <% end %>
+
+              <% elsif !current_buyer.validated? %>
+                <% if has_inquiry?(@artwork) %>
+                  <div class="btn-custom-disabled">Sale Pending</div>
+                  <p><%= link_to 'Resend', reverification_buyer_path(@buyer) %> validation email?</p>
+
+                <% elsif %>
+                  <div class="btn-custom-disabled">Grab it?</div>
+                  <p><%= link_to 'Resend', reverification_buyer_path(@buyer) %> validation email?</p>
+
+                <% end %>
+              <% end %>
+            <% else %>
+              <% if has_inquiry?(@artwork) %>
+                <div class="btn-custom-disabled">Sale Pending</div>
+                <p><%= link_to 'Sign in', new_session_path %> to <strong>Grab</strong> other works!</p>
+
+              <% else %>
+                <div class="btn-custom-disabled">Grab it?</div>
+                <p><%= link_to 'Sign in', new_session_path %> to <strong>Grab!</strong></p>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL FORM -->
+    <%= render 'modalform' %>
+
+    <!-- IMAGE CAROUSEL  -->
+    <div class="span8 column ">
+      <div id="myCarousel" class="carousel slide">
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+          <% if @artworkimage.empty? %>
+            <div class="item active">
+              <%= image_tag "http://www.placehold.it/620x450.png", width: '620px' %>
+              <div class="carousel-caption">
+                <p>Image unavailable...</p>
+              </div>
+            </div>
+          <% else %>
+            <% @artworkimage.each_with_index do |image, index| %>
+              <div class="item<% if index == 0 %> active<% end %>">
+                <%#= link_to(image_tag(image.image_url(:carousel)), image.image_url ) %>
+                <%= image_tag(image.image_url(:carousel)) %>
+                <%# if !image.description.blank? %>
+                  <div class="carousel-caption">
+                    <p><%= image.description %></p>
+                  </div>
+                <%# end %>
+              </div>
+            <% end %> 
+          <% end %>
+        </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      </div>
+    </div>
+  </div>
+</div>

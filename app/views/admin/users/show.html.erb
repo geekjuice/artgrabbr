@@ -1,0 +1,72 @@
+<div class="hero-unit">
+  <h1><%= @user.name %></h1>
+  <p><h2>Admin View</h2></p>
+  <%= link_to "New artwork", new_admin_artwork_path(user_id: @user.id), class: 'btn-custom' %>
+</div>
+
+<div class="btn-custom btn-showall center" id="showall">Show all</div>
+<div class="btn-custom btn-hideall center" id="hideall">Hide all</div>
+
+<% @artworks.each do |artwork| %>
+    <% image = ArtworkImage.find_by_artwork_id_and_showcaseimage(artwork.id, true) %>
+    <div class="banner-holder inquiryfix" id="banner<%= artwork.id%>">
+        <div class="main-banner" >
+          <div class="artimage">
+            <% if image %>
+              <%= image_tag image.image_url(:thumb).to_s, width: '150px' %>
+            <% else %>
+              <%= image_tag "http://www.placehold.it/150x150.png", width: '150px' %>
+            <% end %>
+          </div>
+            <div class="artinfoholder">
+              <div class="banner-title floatright"><%= artwork.title %></div>
+              <div class="inquiry-price">$<%= artwork.price %></div>
+              <div class="inquiry-status">
+              <% if artwork.sold? %>
+                <span class="sold">Unavailable</span>
+              <% else %>
+                Available
+              <% end %>
+              </div>
+              <div class="inquiry-count"><%= !artwork.sold? ? "(#{artwork.orders.count.to_s})" : '' %></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="multi-inquiries" id="banner<%= artwork.id%>-inquiry">
+      <%# artwork.orders.find_all{|x| x.status!="Declined"}.each do |order| %>
+      <% artwork.orders.find(:all, :order => 'requested_price ASC').each do |order| %>
+        <div class="eachbuyer">
+          <div class="buyername"><%= order.name %></div>
+          <div class="buyerprice">$<%= order.requested_price %></div>
+          <div class="buyermessage">
+            <%= order.inquirymessage %>
+            <% if order.inquirymessage.blank? %>[No message...]
+            <% end %>
+          </div>
+          
+          <div class="buyeroption">
+            <% if order.status == "Pending" && !order.artwork.sold? %>
+              <%= link_to 'Accept', accept_admin_user_path(orderid: order.id), class:"btn-custom-small" %>
+              <%= link_to 'Decline', decline_admin_user_path(orderid: order.id), class:"btn-custom-small custom-cancel" %>
+            <% elsif order.status == "Accepted" %>
+              <%= link_to 'Email buyer', '#modal', {:remote => true, 'data-toggle' => 'modal', class:"btn-custom-small" } %>
+              <%= link_to 'Undo ', undo_admin_user_path(orderid: order.id), class:"btn-custom-small custom-cancel" %>
+              <%= render :partial => 'modalemail', :locals => {:order => order} %>
+            <% elsif order.status == "Declined" && !order.artwork.sold? %>
+                <%= link_to 'Undo', undo_admin_user_path(orderid: order.id), class:"btn-custom-small" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="artworkoptions">
+        <%= link_to 'Edit artwork', [:admin, artwork], class: "btn-custom-small" %>
+        <%= link_to 'Remove artwork', [:admin, artwork], confirm: 'Are you sure?', method: :delete, class: "btn-custom-small custom-cancel" %>
+      </div>
+    </div>
+
+    
+
+<% end %>
+

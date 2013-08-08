@@ -1,0 +1,18 @@
+<!-- LIVE MODE -->
+<%= render 'layouts/header'%>
+<% if request.fullpath.downcase == '/artworks' || request.fullpath.downcase == '/howitworks'%>
+	<%= render 'layouts/noticebanner' %>
+<% end %>
+
+<div class="container minheight"> 	
+	<% flash.each do |key, value| %>
+		<%= content_tag(:div, value, class: "alert alert-#{key}") %>
+	<% end %>
+	<%= yield %>
+	<%= debug(params) if Rails.env.development? %>
+
+	<div id="noticetag">		
+		<%= image_tag 'notice.png' %>
+	</div>
+	<div class="clearfooter"></div>
+</div>

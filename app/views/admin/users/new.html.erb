@@ -1,0 +1,17 @@
+<div class="container-content">
+	<h1 class="center">New user</h1>
+
+	<div class="row">
+		<div class="span8 offset2">
+			<div class = "hero-unit">
+			<%= form_for([:admin, @user], :html => {:multipart => true}) do |f| %>
+				<%= render 'userform', f: f %>
+				<div>
+					<%= f.submit "Submit", class: "btn btn-large btn-primary"%>
+					<%= link_to 'Back', 'admin/users_path', class: "btn btn-large" %>
+				</div>
+			<% end %>	
+			</div>
+		</div>
+	</div>
+</div>

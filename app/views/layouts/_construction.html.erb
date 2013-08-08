@@ -1,0 +1,36 @@
+<!-- CONTRUCTION MODE -->
+
+<div id="header">
+	<div class="container center">
+		<h1 id="navbarlogo">
+			<div id="headerlogo">ArtGrabbr</div>
+		</h1>
+	</div>
+</div>
+
+<div class="container minheight"> 
+	<% flash.each do |key, value| %>
+	<%= content_tag(:div, value, class: "alert alert-#{key}") %>
+	<% end %>
+	
+	<div class="hero-unit">
+		<div>
+		<%= image_tag 'logo.png', id:'homelogo', alt: 'ArtGrabbr', height: '50%', width: '50%'%>
+		</div>
+		<div>
+			<%= link_to 'Enter?', '#myModal', {:remote => true, 'data-toggle' => 'modal', class:'btn-custom btn-enter'} %>
+		</div>
+	</div>
+</div>
+
+<div class="modal hide fade" id="myModal">
+	<div class="modal-body">
+		<p><h1 class="center">Coming soon</h1></p>
+		<p><h2 class="center">November 2012 </h2></p>
+		<p><h2 class="center">(No more delays this time. Promise!)</h2></p>
+		<%#= form_for(:mailinglist, url: mailing_lists_path) do |f| %>
+		<%#= f.text_field :email %>
+		<%#= f.submit %>
+		<%# end %>
+	</div>
+</div>

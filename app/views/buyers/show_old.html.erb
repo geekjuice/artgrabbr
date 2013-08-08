@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="hero-unit">
+    	<h1><%= current_buyer.name %></h1>
+    </div>
+
+    <div class="span12 span12thumbs">
+        <h2 class="center">Current inquiries:</h2>
+        <ul class="thumbnails">
+          <% @orders.each do |order| %>
+            <% artwork = Artwork.find(order.artwork_id) %>
+            <% image = ArtworkImage.find_by_artwork_id_and_showcaseimage(artwork.id, true) %>
+            <li class="span4">
+              <div class="thumbnail">
+                <% if artwork.sold? %>
+                  <div class="sold_buyer_thumb"><%= image_tag('soldtag.png', width:"200px") %></div>
+                <% end %>
+                <%= image_tag image.image_url(:thumb).to_s %>
+                <h4 class="center"><%= artwork.title %></h4>
+                <div class="center"> 
+                  <%= link_to "View artwork", artwork , class: "btn btn-small btn-info" %> | 
+                  
+                  <!-- Sold! -->
+                  <% if artwork.sold? %>
+                     <div class="btn btn-small btn-danger disabled">Cancel order</div> |
+                    <%= link_to 'Not Sold?', sold_artwork_path(artwork), class: "btn btn-small btn-inverse" %>
+                  <% else %>
+                    <%= link_to 'Cancel order', order, confirm: 'Are you sure?', method: :delete, class: "btn btn-small btn-danger" %> |
+                    <%= link_to 'Sold?', sold_artwork_path(artwork), class: "btn btn-small btn-inverse" %> 
+                  <% end %>
+
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+    </div>
+</div> 

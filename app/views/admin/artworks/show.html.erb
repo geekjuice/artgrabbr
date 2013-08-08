@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="span4 offset4">
+    <!-- <h1 class="center">Ordering</h1>
+    <div class="center">
+      <p>
+        <%# if @artwork.sold %>
+          <div id="sold">SOLD!</div>   
+          <%#= link_to 'View Order', [:admin, @artwork.order], class: "btn btn-large btn-info" %>     
+        <%# else %>
+          <h2>Available</h2>
+          <%#= link_to 'Order now', new_admin_order_path(artwork_id: @artwork.id), class: "btn btn-large btn-primary" %>
+        <%# end %>
+      </p>
+    </div> -->
+  </div>
+  <div class="span12">
+    <div class="hero-unit">
+      <p>
+        <b>User ID:</b>
+        <%= User.find(@artwork.user_id).name %>
+      </p>
+      <p>
+        <b>User Check (Debug)</b>
+        <%= @artwork.user.name %>
+      </p>
+      <p>
+        <b>Title:</b>
+        <%= @artwork.title %>
+      </p>
+
+      <p>
+        <b>Price:</b>
+        $<%= @artwork.price %>
+      </p>
+
+      <p>
+        <b>Medium:</b>
+        <%= @artwork.medium %>
+      </p>
+
+      <p>
+        <b>Info:</b>
+        <%= @artwork.info%>
+      </p>
+
+      <p>
+        <%= link_to 'Add Artwork Image', new_admin_artwork_image_path(artwork_id: @artwork.id), class: "btn btn-small"%> |
+        <%= link_to 'Edit', edit_admin_artwork_path(artwork_id: @artwork.id), class: "btn btn-small" %> |
+        <%= link_to 'Back', admin_user_path(@artwork.user), class: "btn btn-small" %>
+      </p>
+    </div>
+  </div>
+  <div class="span12">
+    <ul class="thumbnails">
+
+      <% @artworkimage.each do |image| %>
+        <li class="span4">
+          <div class="thumbnail">
+            <%= image_tag image.image_url(:thumb).to_s %>
+            <h4 class="center"><%= image.description %></h4>
+            <div class="center">
+              <% if image.showcaseimage %>
+                <button class="btn btn-small btn-success disabled">Current Showcase</button> 
+              <% else %>
+                <%= link_to "Make showcase?", admin_togglemain_path(imageid: image.id), class: "btn btn-small btn-warning" %>
+              <% end %> | 
+              <%= link_to "Edit", edit_admin_artwork_image_path(image), class: "btn btn-small btn-info" %> | 
+              <%= link_to 'Remove', [:admin, image], confirm: 'Are you sure?', method: :delete, 
+              class: "btn btn-small btn-danger" %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+
+    </ul>
+  </div> 
+
+</div>

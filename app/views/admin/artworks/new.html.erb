@@ -1,0 +1,15 @@
+<div class="content-container center">
+	<h1>New artwork</h1>
+	<h2><%= @user.name %> (<%= @user.id %>)</h2>
+	<div class="row">
+		<div class="span8 offset2">
+			<div class = "hero-unit">
+				<%= form_for([:admin, @artwork]) do |f| %>
+					<%= render 'artworkform', f: f %>
+					<%= link_to 'Back', admin_user_path(@user), class:'btn-modal btn-custom-cancel' %>
+					<%= f.submit "Submit", class: "btn-input btn-custom" %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

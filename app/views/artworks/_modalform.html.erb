@@ -1,0 +1,40 @@
+<div class="modal hide fade" id="modal">
+  <div class="modal-header">
+    <div class="modal-title">
+      Inquiry about <%= @artwork.title %>
+    </div>
+  </div>
+  <%= form_for(@order, :html => {:id => :new_order} ) do |f| %>
+  <div class="modal-body">
+    <div class="row">
+      <%= render 'inquiry', f: f %>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <h1 class="modal-price">Suggested Price: <span id="pricevalue">$<%= @artwork.price %></span></h1>
+    <div class="btn-modal-container">
+      <%= f.submit "Submit", id: "inquirysubmit", class: "btn-input btn-custom" %>
+      <%#= link_to 'Cancel', '#', id: "inquirycancel", 'data-dismiss' => 'modal', class:'btn-modal btn-custom-cancel' %>
+      <div class="btn-modal btn-custom-disabled" id="messageTooLong">Ahem...</div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<div class="modal hide fade" id="limitexceeded">
+  <div class="modal-header">
+    <div class="modal-title">
+      Uh oh!
+    </div>
+  </div>
+  <div class="modal-body">
+    Sorry, it seems you have exceeded the number of artwork requests. Please finish your pending transactions before requesting for more.
+
+    Thank you for your cooperation!
+  </div>
+
+  <div class="modal-footer">
+    <%= link_to 'Back', '#', 'data-dismiss' => 'modal', class:'btn-custom' %>
+  </div>
+</div>
