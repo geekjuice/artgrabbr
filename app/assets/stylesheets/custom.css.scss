@@ -603,6 +603,7 @@ $menubgcolor: rgba(96,131,145,0.75);
 }
 
 #navbarlogo{
+  margin: 0;
 	float: left;
 }
 
@@ -675,6 +676,9 @@ ul#dropdown-signin.dropdown-menu{
 			background-color: rgba(255,255,255, .9);
 		}
 	}
+  input[type="text"], input[type="password"]{
+    padding: 1.4em;
+  }
 
 	footer.menusigninfooter{
 		margin-top: 0;
