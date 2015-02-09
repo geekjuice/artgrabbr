@@ -136,7 +136,7 @@
             <% @artworkimage.each_with_index do |image, index| %>
               <div class="item<% if index == 0 %> active<% end %>">
                 <%#= link_to(image_tag(image.image_url(:carousel)), image.image_url ) %>
-                <%= image_tag(image.image_url(:carousel)) %>
+                <%= image_tag "http://www.placehold.it/620x450.png", width: '620px' %>
                 <%# if !image.description.blank? %>
                   <div class="carousel-caption">
                     <p><%= image.description %></p>
